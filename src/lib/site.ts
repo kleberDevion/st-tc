@@ -70,6 +70,39 @@ export function waLink(msg: string) {
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`;
 }
 
+/** Mensagem que o lead leva pro WhatsApp depois de enviar o formulário — o
+ *  vendedor já recebe com nome, tipo de solução e cidade, sem o cliente digitar.
+ *
+ *  `acao` muda conforme de onde veio ('acabei de simular no site' na
+ *  calculadora, 'acabei de preencher o formulário no site' no form comum).
+ *
+ *  Usa o nome completo: cortar no primeiro espaço erra quando o campo vem
+ *  preenchido de forma inesperada.
+ *
+ *  "Sou {nome}" vai sem artigo de propósito: "Sou o Maria" não funciona, e a
+ *  frase sem ele serve pra qualquer pessoa. */
+export function mensagemLead({
+  nome,
+  tipo_solucao,
+  cidade,
+  acao,
+}: {
+  nome?: string;
+  tipo_solucao?: string;
+  cidade?: string;
+  acao: string;
+}) {
+  const nomeLimpo = (nome || '').trim();
+  const abertura = nomeLimpo ? `Olá! Sou ${nomeLimpo}, ${acao}.` : `Olá! ${acao[0].toUpperCase()}${acao.slice(1)}.`;
+
+  // "Não sei ainda" é opção do select — encaixar isso na frase daria
+  // "energia solar Não sei ainda em Linhares", então o tipo simplesmente sai.
+  const tipo = tipo_solucao && tipo_solucao !== 'Não sei ainda' ? ` ${tipo_solucao}` : '';
+  const onde = cidade ? ` em ${cidade}` : '';
+
+  return `${abertura} Quero energia solar${tipo}${onde}.`;
+}
+
 /** Dispara o evento de lead no GTM. Só no browser — o dataLayer é do cliente.
  *  O envio pra API é separado, na Server Action `submitLead` (lib/actions.ts). */
 export function pushLeadEvent(payload: Record<string, any>) {
