@@ -76,6 +76,9 @@ export function waLink(msg: string) {
  *  `acao` muda conforme de onde veio ('acabei de simular no site' na
  *  calculadora, 'acabei de preencher o formulário no site' no form comum).
  *
+ *  Usa o nome completo: cortar no primeiro espaço erra quando o campo vem
+ *  preenchido de forma inesperada.
+ *
  *  "Sou {nome}" vai sem artigo de propósito: "Sou o Maria" não funciona, e a
  *  frase sem ele serve pra qualquer pessoa. */
 export function mensagemLead({
@@ -89,8 +92,8 @@ export function mensagemLead({
   cidade?: string;
   acao: string;
 }) {
-  const primeiroNome = (nome || '').trim().split(/\s+/)[0];
-  const abertura = primeiroNome ? `Olá! Sou ${primeiroNome}, ${acao}.` : `Olá! ${acao[0].toUpperCase()}${acao.slice(1)}.`;
+  const nomeLimpo = (nome || '').trim();
+  const abertura = nomeLimpo ? `Olá! Sou ${nomeLimpo}, ${acao}.` : `Olá! ${acao[0].toUpperCase()}${acao.slice(1)}.`;
 
   // "Não sei ainda" é opção do select — encaixar isso na frase daria
   // "energia solar Não sei ainda em Linhares", então o tipo simplesmente sai.
