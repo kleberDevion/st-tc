@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CITIES, SOLUCOES, VALORES_CONTA, getClickIds, maskPhone, pushLeadEvent, waLink } from '@/lib/site';
+import { CITIES, SOLUCOES, VALORES_CONTA, getClickIds, maskPhone, mensagemLead, pushLeadEvent, waLink } from '@/lib/site';
 import { submitLead } from '@/lib/actions';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -37,9 +37,10 @@ const LeadForm = ({ origem, pagina, compact, tipoPadrao }: Props) => {
           Nossa equipe especialista já recebeu seu contato e entrará em contato em até 5 minutos no WhatsApp.<br/>
           Seja bem-vindo à família Tecsol!
         </p>
-        <a href={waLink('Olá, acabei de preencher o formulário no site da Tecsol.')} target="_blank" rel="noopener noreferrer"
+        <a href={waLink(mensagemLead({ ...form, acao: 'acabei de preencher o formulário no site' }))}
+          target="_blank" rel="noopener noreferrer"
           className="inline-block bg-background text-primary font-semibold px-6 py-3 rounded-md uppercase text-sm btn-press hover:bg-primary-soft">
-          Acompanhar no WhatsApp
+          Falar agora no WhatsApp →
         </a>
       </div>
     );

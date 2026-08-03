@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CITIES, SOLUCOES, getClickIds, maskPhone, pushLeadEvent, waLink } from '@/lib/site';
+import { CITIES, SOLUCOES, getClickIds, maskPhone, mensagemLead, pushLeadEvent, waLink } from '@/lib/site';
 import { submitLead } from '@/lib/actions';
 import { CheckCircle2, ShieldCheck, Clock, Sparkles } from 'lucide-react';
 
@@ -154,7 +154,8 @@ const Calculadora = () => {
                         ? 'Não conseguimos registrar seu contato agora. Fale com a gente no WhatsApp pra não perder a simulação.'
                         : 'Nossa equipe especialista entrará em contato em até 5 minutos no WhatsApp informado.'}
                     </p>
-                    <a href={waLink(`Olá, sou ${form.nome}, fiz a simulação no site da Tecsol.`)} target="_blank" rel="noopener noreferrer"
+                    <a href={waLink(mensagemLead({ ...form, acao: 'acabei de simular no site' }))}
+                      target="_blank" rel="noopener noreferrer"
                       className="inline-block mt-3 bg-primary text-primary-foreground font-bold px-5 py-2.5 rounded-md text-xs uppercase btn-press hover:bg-primary-dark">
                       Falar agora no WhatsApp →
                     </a>
