@@ -4,7 +4,7 @@ import { CheckCircle2, Target, Eye, Heart } from 'lucide-react';
 import Depoimentos from '@/components/sections/Depoimentos';
 import LeadForm from '@/components/sections/LeadForm';
 import CtaFinal from '@/components/sections/CtaFinal';
-import { waLink } from '@/lib/site';
+import BotaoWhatsAppLead from '@/components/site/BotaoWhatsAppLead';
 
 export const metadata = pageMetadata({
   title: 'Por que a Tecsol? | 11 Anos de Energia Solar no ES',
@@ -28,11 +28,11 @@ const diferenciais = [
 ];
 
 const pagamentos = [
-  { h: 'Financiamento BV', d: '3 meses para começar a pagar.', dest: 'Até 120x', cta: 'Simular financiamento', msg: 'Olá! Tenho interesse no financiamento BV da Tecsol.' },
-  { h: 'Consórcio Conasol', d: 'Cotas de R$20.000, contemplação em 2 meses por lance.', dest: 'Até 36x sem juros', cta: 'Conhecer consórcio', msg: 'Olá! Tenho interesse no consórcio Conasol.' },
-  { h: 'Cartão de Crédito', d: 'À vista ou parcelado da forma que for mais conveniente.', cta: 'Solicitar', msg: 'Olá! Quero pagar com cartão de crédito.' },
-  { h: 'Pagamento Híbrido', d: 'Combine formas de pagamento para montar a solução ideal.', cta: 'Montar meu plano', msg: 'Olá! Quero montar um pagamento híbrido.' },
-  { h: 'À Vista', d: 'Melhor condição e maior desconto nos equipamentos.', dest: 'Maior desconto', cta: 'Solicitar desconto', msg: 'Olá! Quero pagar à vista com desconto.' },
+  { h: 'Financiamento BV', d: '3 meses para começar a pagar.', dest: 'Até 120x', cta: 'Simular financiamento', msg: 'tenho interesse no financiamento BV' },
+  { h: 'Consórcio Conasol', d: 'Cotas de R$20.000, contemplação em 2 meses por lance.', dest: 'Até 36x sem juros', cta: 'Conhecer consórcio', msg: 'tenho interesse no consórcio Conasol' },
+  { h: 'Cartão de Crédito', d: 'À vista ou parcelado da forma que for mais conveniente.', cta: 'Solicitar', msg: 'quero pagar com cartão de crédito' },
+  { h: 'Pagamento Híbrido', d: 'Combine formas de pagamento para montar a solução ideal.', cta: 'Montar meu plano', msg: 'quero montar um pagamento híbrido' },
+  { h: 'À Vista', d: 'Melhor condição e maior desconto nos equipamentos.', dest: 'Maior desconto', cta: 'Solicitar desconto', msg: 'quero pagar à vista com desconto' },
 ];
 
 const Pagina = () => (
@@ -149,19 +149,19 @@ const Pagina = () => (
               <h3 className="text-foreground font-bold text-lg mb-2">{p.h}</h3>
               {p.dest && <p className="text-primary font-extrabold text-xl mb-2">{p.dest}</p>}
               <p className="text-foreground text-sm mb-4">{p.d}</p>
-              <a href={waLink(p.msg)} target="_blank" rel="noopener noreferrer"
+              <BotaoWhatsAppLead acao={p.msg} origem="site_sobre_pagamento"
                 className="inline-block bg-primary text-primary-foreground font-bold px-5 py-2.5 rounded-md text-xs uppercase btn-press hover:bg-primary-dark">
                 {p.cta}
-              </a>
+              </BotaoWhatsAppLead>
             </article>
           ))}
         </div>
         <div className="text-center mt-10 reveal">
           <p className="text-muted-foreground mb-3">Não sabe qual escolher?</p>
-          <a href={waLink('Olá! Gostaria de entender as opções de pagamento da Tecsol.')} target="_blank" rel="noopener noreferrer"
+          <BotaoWhatsAppLead acao="gostaria de entender as opções de pagamento" origem="site_sobre_pagamentos"
             className="inline-block bg-primary text-primary-foreground font-bold px-7 py-3.5 rounded-md uppercase text-sm btn-press hover:bg-primary-dark">
             Falar com especialista no WhatsApp →
-          </a>
+          </BotaoWhatsAppLead>
         </div>
       </div>
     </section>

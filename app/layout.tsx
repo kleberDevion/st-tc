@@ -6,6 +6,7 @@ import Footer from '@/components/site/Footer';
 import WhatsAppFab from '@/components/site/WhatsAppFab';
 import CookieBanner from '@/components/site/CookieBanner';
 import SiteEffects from '@/components/site/SiteEffects';
+import { WhatsAppLeadProvider } from '@/components/site/WhatsAppLead';
 import './globals.css';
 
 // Self-hospedada no build: some o request pro Google Fonts em runtime (era um
@@ -114,10 +115,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         <div className="min-h-screen flex flex-col bg-background">
           <SiteEffects />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFab />
+          <WhatsAppLeadProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <WhatsAppFab />
+          </WhatsAppLeadProvider>
           <CookieBanner />
         </div>
       </body>

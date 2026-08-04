@@ -6,11 +6,12 @@ import Link from 'next/link';
 import { MapPin, Phone, Instagram, Facebook, MessageCircle, Clock, Star, Plus, Minus } from 'lucide-react';
 import LeadForm from '@/components/sections/LeadForm';
 import Depoimentos from '@/components/sections/Depoimentos';
-import { SITE, waLink } from '@/lib/site';
+import { SITE } from '@/lib/site';
 import contato1Asset from '@/assets/contato-1.jpg';
 import contato2Asset from '@/assets/contato-2.jpg';
 import contato3Asset from '@/assets/contato-3.jpg';
 import fortlevLogo from '@/assets/logo-fortlev.png';
+import { useWhatsAppLead } from '@/components/site/WhatsAppLead';
 const heroRes = contato1Asset;
 const heroCom = contato2Asset;
 const heroRur = contato3Asset;
@@ -30,6 +31,7 @@ const faqs = [
 ];
 
 const Conteudo = () => {
+  const pedirContato = useWhatsAppLead();
   const [i, setI] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   useEffect(() => {
@@ -99,10 +101,10 @@ const Conteudo = () => {
               <li className="flex items-center gap-2"><Facebook size={16} className="text-primary"/>Tecsol Engenharia</li>
               <li className="flex items-center gap-2"><Clock size={16} className="text-primary"/>Seg-Sex 8h-18h | Sáb 8h-12h</li>
             </ul>
-            <a href={waLink('Olá, vim pelo site da Tecsol.')} target="_blank" rel="noopener noreferrer"
-              className="block text-center bg-primary text-primary-foreground font-bold py-3 rounded-md uppercase text-sm btn-press hover:bg-primary-dark">
+            <button type="button" onClick={() => pedirContato({ acao: 'vim pelo site da Tecsol', origem: 'site_contato_lateral' })}
+              className="block w-full text-center bg-primary text-primary-foreground font-bold py-3 rounded-md uppercase text-sm btn-press hover:bg-primary-dark">
               Falar no WhatsApp
-            </a>
+            </button>
           </div>
           <div className="bg-background rounded-xl p-6 reveal text-center">
             <h3 className="text-primary font-bold text-xl mb-4">Parceiro Oficial</h3>
@@ -138,10 +140,10 @@ const Conteudo = () => {
       <section className="bg-primary text-primary-foreground py-16 lg:py-20">
         <div className="container text-center">
           <h2 className="font-bold text-3xl lg:text-4xl mb-6">Nossa equipe está pronta para te atender agora</h2>
-          <a href={waLink('Olá, quero falar com um especialista da Tecsol agora.')} target="_blank" rel="noopener noreferrer"
+          <button type="button" onClick={() => pedirContato({ acao: 'quero falar com um especialista agora', origem: 'site_contato_cta' })}
             className="inline-block bg-background text-primary font-bold px-8 py-4 rounded-md uppercase text-sm tracking-wide btn-press hover:bg-primary-soft">
             Falar no WhatsApp →
-          </a>
+          </button>
           <p className="text-xs mt-5 opacity-90">Atendimento em até 5 minutos  •  Orçamento gratuito</p>
         </div>
       </section>

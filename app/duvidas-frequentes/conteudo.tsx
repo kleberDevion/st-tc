@@ -5,7 +5,7 @@ import { faqs } from '@/lib/faqs';
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import Calculadora from '@/components/sections/Calculadora';
-import { waLink } from '@/lib/site';
+import { useWhatsAppLead } from '@/components/site/WhatsAppLead';
 
 const mitos = [
   { tipo: 'MITO', t: 'Energia solar não funciona em dia nublado', d: 'Funciona sim — apenas com produção reduzida. O cálculo considera a média anual de irradiação.' },
@@ -19,6 +19,7 @@ const mitos = [
 
 
 const Conteudo = () => {
+  const pedirContato = useWhatsAppLead();
   const [open, setOpen] = useState<number | null>(0);
   return (
     <>
@@ -61,10 +62,10 @@ const Conteudo = () => {
                 {open === k && (
                   <div className="px-5 pb-5 text-foreground text-sm animate-fade-in">
                     <p>{f.r}</p>
-                    <a href={waLink(`Olá, tenho uma dúvida sobre: ${f.p}`)} target="_blank" rel="noopener noreferrer"
+                    <button type="button" onClick={() => pedirContato({ acao: `tenho uma dúvida sobre "${f.p.replace(/[?.]+$/, '')}"`, origem: 'site_duvidas' })}
                       className="inline-block mt-3 text-primary font-bold hover:underline text-sm">
                       Tirar essa dúvida no WhatsApp →
-                    </a>
+                    </button>
                   </div>
                 )}
               </div>

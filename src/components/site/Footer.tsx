@@ -1,11 +1,16 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Instagram, Facebook, MessageCircle, MapPin, Phone, Clock } from 'lucide-react';
-import { SITE, waLink } from '@/lib/site';
+import { SITE } from '@/lib/site';
 import logo from '@/assets/logo-tecsol.png';
 import fortlevLogo from '@/assets/logo-fortlev.png';
+import { useWhatsAppLead } from '@/components/site/WhatsAppLead';
 
-const Footer = () => (
+const Footer = () => {
+  const pedirContato = useWhatsAppLead();
+  return (
   <footer className="bg-background border-t border-border mt-0">
     <div className="container py-14 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
       <div>
@@ -17,7 +22,7 @@ const Footer = () => (
         <div className="flex gap-3">
           <a href={SITE.instagramUrl} aria-label="Instagram" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary-dark transition"><Instagram size={18}/></a>
           <a href={SITE.facebookUrl} aria-label="Facebook" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary-dark transition"><Facebook size={18}/></a>
-          <a href={waLink('Olá, vim pelo site da Tecsol.')} aria-label="WhatsApp" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary-dark transition"><MessageCircle size={18}/></a>
+          <button type="button" onClick={() => pedirContato({ acao: 'vim pelo site da Tecsol', origem: 'site_rodape' })} aria-label="WhatsApp" className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary-dark transition"><MessageCircle size={18}/></button>
         </div>
       </div>
 
@@ -74,5 +79,6 @@ const Footer = () => (
       </div>
     </div>
   </footer>
-);
+  );
+};
 export default Footer;
